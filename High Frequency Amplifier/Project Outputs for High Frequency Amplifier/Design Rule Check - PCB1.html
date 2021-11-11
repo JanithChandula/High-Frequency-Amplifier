@@ -1,0 +1,509 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD17\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">6/23/2020</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">8:59:36 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc" class="file"><acronym title="D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc">D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">3</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">48</td></tr>
+</table>
+</td>
+</table><a name="IDDCFOU3SYEP5XKBXFIMIPW43AKOCIHZWTWC3T3ROWLVZGG4BUJD5"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDA3CLLTW4EC2PKBY4VDZRFHN3WJRVNJYZ5RA3HAMFLOPTHPNQJWFI">Your board contains 3 shelved polygons - copper connectivity will not be reported correctly. Unshelve polygons and re-run DRC check before  producing manufacturing outputs.</a></td>
+<td class="column2">3</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">3</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBURWI2HHBSMLBDETWLPEOOP1FMFNYSRM2OIRTGJOW44XFDMBXKVI">Clearance Constraint (Gap=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID5YVV5NWKS3KPHMXEQUYNFEBTABEQS2NJKI4Q4XGKV2CKS4OQPP3H">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDIGE1GSLSRQETKEKYW32PTE3QKLARCRQFMEP40WK03WGIWIIXEAXO">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDI1IAWSMDAHLLBAV3OULU4TNAINCGE5LVGDUHYJGVCBRYZQGRRV2H">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">3</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDDLMXP45NQLEOKL1NR4PPQ3NMIBRQLGDEPL023YK4O1G5AXHOWU1B">Width Constraint (Min=25mil) (Max=30mil) (Preferred=25mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDMKLZAY2IH43KPEE1DRXQFEMKVKA101RYLIICDKDXV5RHZW2WYOLJ">Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID1F03OLWT4KGRCKQXT1I1OBPNPHJEA0JEWCG5AQI1M4RNFLPLJYVL">Hole Size Constraint (Min=1mil) (Max=100mil) (All)</a></td>
+<td class="column2">8</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKS1DJRP3CEP5N1GC3JZEW2QPFMUJII3PWY3ARZFYLKQG3CIMHGQN">Hole To Hole Clearance (Gap=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCGVQTIU3KRQ3IXRFZWCEOP32FNXUE1PYI0XFZFNCD2ISMQHYTZQB">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDIA4BRLGJ0330HZ5XEKDMZWOHSWL4CYIMFQ5LGNRPA4ZIHIF4XQO">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</a></td>
+<td class="column2">28</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDTAL5E44DVTFNEITMRVQGIOAXLBCXFMSNTMX0UIJSY3JMMALSJQJC">Silk to Silk (Clearance=10mil) (All),(All)</a></td>
+<td class="column2">8</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0KDO5GNOPAKLLRI11BIHCZBXSPD1QYDVXQPISLFUNSDJKCHADEXN">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBQCOTQ2ILW01FXHYO0LVRELIJPHMIOR551LYEQPWNT5ZCMPCKTTH">Room shematic (Bounding Region = (1120mil, 1310mil, 6865mil, 4835mil) (InComponentClass('shematic'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDVFOFJEBXQ4LYO13DSRYWYVRZ0JTKB5QKPY2B4XKCJIUEGBSDWVAD">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">48</td>
+</tr>
+</table><br><a name="ID2F0MBGVAXWRBLHQOXAAUAM4SQEYCMHCPRQ15S5FDJSUNTVJQR1DH"><h2>Warnings</h2></a><a name="IDA3CLLTW4EC2PKBY4VDZRFHN3WJRVNJYZ5RA3HAMFLOPTHPNQJWFI"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="warning">Your board contains 3 shelved polygons - copper connectivity will not be reported correctly. Unshelve polygons and re-run DRC check before  producing manufacturing outputs.</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">Polygon named: Bottom Layer-No Net On Bottom Layer</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1">Polygon named: Bottom Layer-No Net On Bottom Layer</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1">Polygon named: Bottom Layer-No Net On Bottom Layer</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDI1IAWSMDAHLLBAV3OULU4TNAINCGE5LVGDUHYJGVCBRYZQGRRV2H"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Modified Polygon (Allow modified: No), (Allow shelved: No)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1023.622mil|Location2.X=4803.15mil|Location1.Y=1181.102mil|Location2.Y=4330.709mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1023.622mil|Location2.X=4803.15mil|Location1.Y=1181.102mil|Location2.Y=4330.709mil|Absolute=True">Modified Polygon: Polygon Shelved  (No Net) on Connections </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1035mil|Location2.X=4835mil|Location1.Y=1165mil|Location2.Y=4345mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1035mil|Location2.X=4835mil|Location1.Y=1165mil|Location2.Y=4345mil|Absolute=True">Modified Polygon: Polygon Shelved  (No Net) on Connections </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1023.622mil|Location2.X=4842.52mil|Location1.Y=1181.102mil|Location2.Y=4370.079mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1023.622mil|Location2.X=4842.52mil|Location1.Y=1181.102mil|Location2.Y=4370.079mil|Absolute=True">Modified Polygon: Polygon Shelved  (No Net) on Connections </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID1F03OLWT4KGRCKQXT1I1OBPNPHJEA0JEWCG5AQI1M4RNFLPLJYVL"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole Size Constraint (Min=1mil) (Max=100mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1284.375mil|Location2.X=1415.625mil|Location1.Y=1459.375mil|Location2.Y=1590.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1284.375mil|Location2.X=1415.625mil|Location1.Y=1459.375mil|Location2.Y=1590.625mil|Absolute=True">Hole Size Constraint: (130mil &gt; 100mil) Pad Q5-(1350mil,1525mil) on Multi-Layer Actual Hole Size = 130mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1284.375mil|Location2.X=1415.625mil|Location1.Y=2294.375mil|Location2.Y=2425.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1284.375mil|Location2.X=1415.625mil|Location1.Y=2294.375mil|Location2.Y=2425.625mil|Absolute=True">Hole Size Constraint: (130mil &gt; 100mil) Pad Q4-(1350mil,2360mil) on Multi-Layer Actual Hole Size = 130mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1319.375mil|Location2.X=1450.625mil|Location1.Y=3204.375mil|Location2.Y=3335.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1319.375mil|Location2.X=1450.625mil|Location1.Y=3204.375mil|Location2.Y=3335.625mil|Absolute=True">Hole Size Constraint: (130mil &gt; 100mil) Pad Q3-(1385mil,3270mil) on Multi-Layer Actual Hole Size = 130mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1349.375mil|Location2.X=1480.625mil|Location1.Y=3989.375mil|Location2.Y=4120.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1349.375mil|Location2.X=1480.625mil|Location1.Y=3989.375mil|Location2.Y=4120.625mil|Absolute=True">Hole Size Constraint: (130mil &gt; 100mil) Pad Q2-(1415mil,4055mil) on Multi-Layer Actual Hole Size = 130mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4660.784mil|Location2.X=4788.034mil|Location1.Y=1196.217mil|Location2.Y=1323.467mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4660.784mil|Location2.X=4788.034mil|Location1.Y=1196.217mil|Location2.Y=1323.467mil|Absolute=True">Hole Size Constraint: (126mil &gt; 100mil) Pad Free-6(4724.409mil,1259.842mil) on Multi-Layer Actual Hole Size = 126mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4660.784mil|Location2.X=4788.034mil|Location1.Y=4148.973mil|Location2.Y=4276.223mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4660.784mil|Location2.X=4788.034mil|Location1.Y=4148.973mil|Location2.Y=4276.223mil|Absolute=True">Hole Size Constraint: (126mil &gt; 100mil) Pad Free-7(4724.409mil,4212.598mil) on Multi-Layer Actual Hole Size = 126mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1117.477mil|Location2.X=1244.727mil|Location1.Y=1196.217mil|Location2.Y=1323.467mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1117.477mil|Location2.X=1244.727mil|Location1.Y=1196.217mil|Location2.Y=1323.467mil|Absolute=True">Hole Size Constraint: (126mil &gt; 100mil) Pad Free-8(1181.102mil,1259.842mil) on Multi-Layer Actual Hole Size = 126mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1117.477mil|Location2.X=1244.727mil|Location1.Y=4148.973mil|Location2.Y=4276.223mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1117.477mil|Location2.X=1244.727mil|Location1.Y=4148.973mil|Location2.Y=4276.223mil|Absolute=True">Hole Size Constraint: (126mil &gt; 100mil) Pad Free-9(1181.102mil,4212.598mil) on Multi-Layer Actual Hole Size = 126mil</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDIA4BRLGJ0330HZ5XEKDMZWOHSWL4CYIMFQ5LGNRPA4ZIHIF4XQO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3942.605mil|Location2.X=3950.272mil|Location1.Y=2773.01mil|Location2.Y=2780.677mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3942.605mil|Location2.X=3950.272mil|Location1.Y=2773.01mil|Location2.Y=2780.677mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Arc (3965.001mil,2870.012mil) on Top Overlay And Pad Q1-E(3965mil,2770mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3936.055mil|Location2.X=3943.722mil|Location1.Y=2957.775mil|Location2.Y=2965.442mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3936.055mil|Location2.X=3943.722mil|Location1.Y=2957.775mil|Location2.Y=2965.442mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Arc (3965.001mil,2869.988mil) on Top Overlay And Pad Q1-C(3965mil,2970mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2767.058mil|Location2.X=2778.308mil|Location1.Y=2524.375mil|Location2.Y=2535.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2767.058mil|Location2.X=2778.308mil|Location1.Y=2524.375mil|Location2.Y=2535.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (2755mil,2530mil)(2764mil,2530mil) on Top Overlay And Pad R7-1(2805mil,2530mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2531.692mil|Location2.X=2542.942mil|Location1.Y=2524.375mil|Location2.Y=2535.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2531.692mil|Location2.X=2542.942mil|Location1.Y=2524.375mil|Location2.Y=2535.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (2546mil,2530mil)(2555mil,2530mil) on Top Overlay And Pad R7-2(2505mil,2530mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.637mil|Location2.X=1978.304mil|Location1.Y=1615.431mil|Location2.Y=1623.098mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.637mil|Location2.X=1978.304mil|Location1.Y=1615.431mil|Location2.Y=1623.098mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Pad Q5-3(2040mil,1625mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.637mil|Location2.X=1978.304mil|Location1.Y=1515.431mil|Location2.Y=1523.098mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.637mil|Location2.X=1978.304mil|Location1.Y=1515.431mil|Location2.Y=1523.098mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Pad Q5-2(2040mil,1525mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.637mil|Location2.X=1978.304mil|Location1.Y=1415.431mil|Location2.Y=1423.098mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.637mil|Location2.X=1978.304mil|Location1.Y=1415.431mil|Location2.Y=1423.098mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Pad Q5-1(2040mil,1425mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.637mil|Location2.X=1978.304mil|Location1.Y=2450.431mil|Location2.Y=2458.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.637mil|Location2.X=1978.304mil|Location1.Y=2450.431mil|Location2.Y=2458.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Pad Q4-3(2040mil,2460mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.637mil|Location2.X=1978.304mil|Location1.Y=2350.431mil|Location2.Y=2358.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.637mil|Location2.X=1978.304mil|Location1.Y=2350.431mil|Location2.Y=2358.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Pad Q4-2(2040mil,2360mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.637mil|Location2.X=1978.304mil|Location1.Y=2250.431mil|Location2.Y=2258.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1970.637mil|Location2.X=1978.304mil|Location1.Y=2250.431mil|Location2.Y=2258.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Pad Q4-1(2040mil,2260mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2807.058mil|Location2.X=2818.308mil|Location1.Y=1519.375mil|Location2.Y=1530.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2807.058mil|Location2.X=2818.308mil|Location1.Y=1519.375mil|Location2.Y=1530.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (2795mil,1525mil)(2804mil,1525mil) on Top Overlay And Pad R6-1(2845mil,1525mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2571.692mil|Location2.X=2582.942mil|Location1.Y=1519.375mil|Location2.Y=1530.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2571.692mil|Location2.X=2582.942mil|Location1.Y=1519.375mil|Location2.Y=1530.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (2586mil,1525mil)(2595mil,1525mil) on Top Overlay And Pad R6-2(2545mil,1525mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2005.637mil|Location2.X=2013.304mil|Location1.Y=3360.431mil|Location2.Y=3368.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2005.637mil|Location2.X=2013.304mil|Location1.Y=3360.431mil|Location2.Y=3368.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Pad Q3-3(2075mil,3370mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2005.637mil|Location2.X=2013.304mil|Location1.Y=3260.431mil|Location2.Y=3268.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2005.637mil|Location2.X=2013.304mil|Location1.Y=3260.431mil|Location2.Y=3268.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Pad Q3-2(2075mil,3270mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2005.637mil|Location2.X=2013.304mil|Location1.Y=3160.431mil|Location2.Y=3168.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2005.637mil|Location2.X=2013.304mil|Location1.Y=3160.431mil|Location2.Y=3168.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Pad Q3-1(2075mil,3170mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3619.375mil|Location2.X=3630.625mil|Location1.Y=1546.692mil|Location2.Y=1557.942mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3619.375mil|Location2.X=3630.625mil|Location1.Y=1546.692mil|Location2.Y=1557.942mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (3625mil,1561mil)(3625mil,1570mil) on Top Overlay And Pad R4-1(3625mil,1520mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3619.375mil|Location2.X=3630.625mil|Location1.Y=1782.058mil|Location2.Y=1793.308mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3619.375mil|Location2.X=3630.625mil|Location1.Y=1782.058mil|Location2.Y=1793.308mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (3625mil,1770mil)(3625mil,1779mil) on Top Overlay And Pad R4-2(3625mil,1820mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4199.375mil|Location2.X=4210.625mil|Location1.Y=3636.692mil|Location2.Y=3647.942mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4199.375mil|Location2.X=4210.625mil|Location1.Y=3636.692mil|Location2.Y=3647.942mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (4205mil,3651mil)(4205mil,3660mil) on Top Overlay And Pad R5-1(4205mil,3610mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4199.375mil|Location2.X=4210.625mil|Location1.Y=3872.058mil|Location2.Y=3883.308mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4199.375mil|Location2.X=4210.625mil|Location1.Y=3872.058mil|Location2.Y=3883.308mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (4205mil,3860mil)(4205mil,3869mil) on Top Overlay And Pad R5-2(4205mil,3910mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2035.637mil|Location2.X=2043.304mil|Location1.Y=4145.431mil|Location2.Y=4153.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2035.637mil|Location2.X=2043.304mil|Location1.Y=4145.431mil|Location2.Y=4153.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Pad Q2-3(2105mil,4155mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2035.637mil|Location2.X=2043.304mil|Location1.Y=4045.431mil|Location2.Y=4053.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2035.637mil|Location2.X=2043.304mil|Location1.Y=4045.431mil|Location2.Y=4053.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Pad Q2-2(2105mil,4055mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2035.637mil|Location2.X=2043.304mil|Location1.Y=3945.431mil|Location2.Y=3953.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2035.637mil|Location2.X=2043.304mil|Location1.Y=3945.431mil|Location2.Y=3953.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Pad Q2-1(2105mil,3955mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3274.375mil|Location2.X=3285.625mil|Location1.Y=1777.058mil|Location2.Y=1788.308mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3274.375mil|Location2.X=3285.625mil|Location1.Y=1777.058mil|Location2.Y=1788.308mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (3280mil,1765mil)(3280mil,1774mil) on Top Overlay And Pad R3-1(3280mil,1815mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3274.375mil|Location2.X=3285.625mil|Location1.Y=1541.692mil|Location2.Y=1552.942mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3274.375mil|Location2.X=3285.625mil|Location1.Y=1541.692mil|Location2.Y=1552.942mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (3280mil,1556mil)(3280mil,1565mil) on Top Overlay And Pad R3-2(3280mil,1515mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.375mil|Location2.X=3890.625mil|Location1.Y=3977.058mil|Location2.Y=3988.308mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.375mil|Location2.X=3890.625mil|Location1.Y=3977.058mil|Location2.Y=3988.308mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (3885mil,3965mil)(3885mil,3974mil) on Top Overlay And Pad R1-1(3885mil,4015mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.375mil|Location2.X=3890.625mil|Location1.Y=3741.692mil|Location2.Y=3752.942mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3879.375mil|Location2.X=3890.625mil|Location1.Y=3741.692mil|Location2.Y=3752.942mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (3885mil,3756mil)(3885mil,3765mil) on Top Overlay And Pad R1-2(3885mil,3715mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3614.375mil|Location2.X=3625.625mil|Location1.Y=3977.058mil|Location2.Y=3988.308mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3614.375mil|Location2.X=3625.625mil|Location1.Y=3977.058mil|Location2.Y=3988.308mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (3620mil,3965mil)(3620mil,3974mil) on Top Overlay And Pad R2-1(3620mil,4015mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3614.375mil|Location2.X=3625.625mil|Location1.Y=3741.692mil|Location2.Y=3752.942mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3614.375mil|Location2.X=3625.625mil|Location1.Y=3741.692mil|Location2.Y=3752.942mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.491mil &lt; 10mil) Between Track (3620mil,3756mil)(3620mil,3765mil) on Top Overlay And Pad R2-2(3620mil,3715mil) on Multi-Layer [Top Overlay] to [Top Solder] clearance [9.491mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDTAL5E44DVTFNEITMRVQGIOAXLBCXFMSNTMX0UIJSY3JMMALSJQJC"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1481.004mil|Location2.X=1492.254mil|Location1.Y=1340.931mil|Location2.Y=1352.181mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1481.004mil|Location2.X=1492.254mil|Location1.Y=1340.931mil|Location2.Y=1352.181mil|Absolute=True">Silk To Silk Clearance Constraint: (5.426mil &lt; 10mil) Between Text "A17,5mm" (1479.626mil,1349.789mil) on Top Overlay And Track (1490mil,1345mil)(1815mil,1345mil) on Top Overlay Silk Text to Silk Clearance [5.426mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1486.233mil|Location2.X=1493.899mil|Location1.Y=1463.059mil|Location2.Y=1470.725mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1486.233mil|Location2.X=1493.899mil|Location1.Y=1463.059mil|Location2.Y=1470.725mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 10mil) Between Text "A17,5mm" (1479.626mil,1349.789mil) on Top Overlay And Track (1490mil,1345mil)(1490mil,1705mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1481.004mil|Location2.X=1492.254mil|Location1.Y=2175.931mil|Location2.Y=2187.181mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1481.004mil|Location2.X=1492.254mil|Location1.Y=2175.931mil|Location2.Y=2187.181mil|Absolute=True">Silk To Silk Clearance Constraint: (5.426mil &lt; 10mil) Between Text "A17,5mm" (1479.626mil,2184.789mil) on Top Overlay And Track (1490mil,2180mil)(1815mil,2180mil) on Top Overlay Silk Text to Silk Clearance [5.426mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1486.233mil|Location2.X=1493.899mil|Location1.Y=2298.059mil|Location2.Y=2305.725mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1486.233mil|Location2.X=1493.899mil|Location1.Y=2298.059mil|Location2.Y=2305.725mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 10mil) Between Text "A17,5mm" (1479.626mil,2184.789mil) on Top Overlay And Track (1490mil,2180mil)(1490mil,2540mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1516.074mil|Location2.X=1527.324mil|Location1.Y=3085.953mil|Location2.Y=3097.203mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1516.074mil|Location2.X=1527.324mil|Location1.Y=3085.953mil|Location2.Y=3097.203mil|Absolute=True">Silk To Silk Clearance Constraint: (5.318mil &lt; 10mil) Between Text "A17,5mm" (1514.788mil,3094.88mil) on Top Overlay And Track (1525mil,3090mil)(1850mil,3090mil) on Top Overlay Silk Text to Silk Clearance [5.318mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1521.312mil|Location2.X=1528.978mil|Location1.Y=3208.089mil|Location2.Y=3215.756mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1521.312mil|Location2.X=1528.978mil|Location1.Y=3208.089mil|Location2.Y=3215.756mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 10mil) Between Text "A17,5mm" (1514.788mil,3094.88mil) on Top Overlay And Track (1525mil,3090mil)(1525mil,3450mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1546.074mil|Location2.X=1557.324mil|Location1.Y=3870.953mil|Location2.Y=3882.203mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1546.074mil|Location2.X=1557.324mil|Location1.Y=3870.953mil|Location2.Y=3882.203mil|Absolute=True">Silk To Silk Clearance Constraint: (5.318mil &lt; 10mil) Between Text "A17,5mm" (1544.788mil,3879.88mil) on Top Overlay And Track (1555mil,3875mil)(1880mil,3875mil) on Top Overlay Silk Text to Silk Clearance [5.318mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1551.312mil|Location2.X=1558.978mil|Location1.Y=3993.089mil|Location2.Y=4000.756mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1551.312mil|Location2.X=1558.978mil|Location1.Y=3993.089mil|Location2.Y=4000.756mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 10mil) Between Text "A17,5mm" (1544.788mil,3879.88mil) on Top Overlay And Track (1555mil,3875mil)(1555mil,4235mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID0KDO5GNOPAKLLRI11BIHCZBXSPD1QYDVXQPISLFUNSDJKCHADEXN"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Net Antennae (Tolerance=0mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1977mil|Location2.X=2016.916mil|Location1.Y=3349mil|Location2.Y=3410.286mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Acedemic\Semester 3\Lab Project\High Frequency Amplifier\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1977mil|Location2.X=2016.916mil|Location1.Y=3349mil|Location2.Y=3410.286mil|Absolute=True">Net Antennae: Track (1993mil,3365mil)(2195mil,3365mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
